@@ -1,0 +1,77 @@
+<div class="mb-3" >
+<div class="row">   
+ <div class="col-6">
+  <label for="prdCat" class="form-label col-12">Category: </label>
+  <!-- <select #cat  name="Cat" id="prdCat" (change)="getSelectedCat(cat.value )"> -->
+  <!-- [(ngModel)] refere to the value of any input  
+    i made tow-way-binding to this probirty "selectedCatID" 
+    this meane any change of this proberty in the view will change the component and vice versa -->
+  <select  name="Cat" id="prdCat" [(ngModel)]="selectedCatID" class="form-control col-12">
+    <option [value]="cat.id" *ngFor="let cat of catList">
+      {{ cat.name }}
+    </option>
+  </select>
+ </div>
+  <hr>
+<div class="col-6">
+  <label for="maxPrice" class="form-label col-12">max price </label>
+
+  <input id="maxPrice"  type="number" class=" form-control col-12"  #maxPriceInput >
+     <button
+  type="button"
+  class="btn btn-primary"
+  (click)="setMaxPrice(maxPriceInput.value)"
+>
+  search
+</button>
+</div>
+</div>
+<div >
+<app-product-list #productListComponent [sentCatID]="selectedCatID" (onCreateCartPro)="addCartProduct($event)" [sentMaxPrice]="maxPrice"></app-product-list>
+</div> 
+<!-- ----------------------------------------------cart list----------------------------------------------- -->
+ <h1 style="text-align: center;">cart list</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">name</th>
+      <th scope="col">price</th>
+      <th scope="col">count</th>
+      <th scope="col">total</th>
+      <th scope="col">remove
+      </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pro of CartList; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td >{{pro.name}}</td>
+      <td >{{pro.price}}</td>
+      <td >
+        <input type="number" [value]="pro.count"  min="1" [max]="pro.availableQuantity" #countRef  [(ngModel)]="countRef.value" 
+        (change)="updateOrderTotalPrice()"  [(ngModel)]="pro.count">
+      </td>
+      <td  style=" font-weight: 700;">{{pro.price* +countRef.value}}</td>
+      <td ><button type="button" class="btn btn-outline-danger" (click)="removeProdct(i,pro)">Remove</button> </td>
+
+    </tr>
+    
+  </tbody>
+</table>
+<h3 class="text-danger"> <br>
+  order total price {{ orderTotalPrice}}</h3> 
+<hr>
+<button
+  type="button"
+  class="btn btn-success "
+  (click)="completeOrder()"
+>
+place order
+</button>
+<!-- 
+<h3>Enter Your Name</h3>
+<input type="text" #clintNameInp class="form-control"> -->
+
+</div>
