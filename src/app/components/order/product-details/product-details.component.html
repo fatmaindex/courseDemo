@@ -1,0 +1,33 @@
+<div class="card" style="width: 30%">
+  <img class="card-img-top" [src]="prd?.imgURL" alt="Card image cap" />
+  <div class="card-body " >
+    <h5 class="card-title">{{ prd?.name }}</h5>
+    <div class="card-text">
+      <div>price:{{ prd?.price }}</div>
+      <div>quantity:{{ prd?.quantity }}</div>
+    </div>
+    <hr />
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="prevPrd()"
+        [disabled]="CurrentPrdID == prdIDsArr[0]"
+      >
+        Previous
+      </button>
+      <button type="button" class="btn btn-success" (click)="goBack()">
+        Back
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="nextPrd()"
+        [disabled]="CurrentPrdID == prdIDsArr[prdIDsArr.length - 1]"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+ 
+</div>

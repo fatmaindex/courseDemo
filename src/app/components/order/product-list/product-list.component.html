@@ -17,7 +17,7 @@
         </option>
       </select>
     </div> -->
-    
+
     <!-- <div class="text-secondary">
       [for test] Category ID :
       {{ selectedCatID }}
@@ -38,9 +38,10 @@
           <th scope="col">Image</th>
           <th scope="col">Quantity</th>
           <th scope="col">Price</th>
-
           <th scope="col">Needed Quantity</th>
-          <th scope="col">Buy</th>
+
+          <th scope="col">Details</th>
+          <th scope="col">Add</th>
         </tr>
       </thead>
       <tbody>
@@ -61,9 +62,11 @@
         <!-- *ngFor="let pro of prdList; let i = index" <tr  [style.backgroundColor]="(pro.quantity==0)? 'yellow':'lightgray' "> -->
         <tr
           *ngFor="let pro of prdListOfCatId; let i = index"
-          [ngClass]="{ 'bg-warning text-darkred': pro.quantity == 0 ,'bg-gray text-darkblue':pro.quantity !== 0 }"
-          [style.color]="(pro.quantity==0)? 'red':'darkblue' "
-
+          [ngClass]="{
+            'bg-warning text-darkred': pro.quantity == 0,
+            'bg-gray text-darkblue': pro.quantity !== 0
+          }"
+          [style.color]="pro.quantity == 0 ? 'red' : 'darkblue'"
         >
           <td>{{ i + 1 }}</td>
           <!-- safe navegation operatior " ? " we use it to avoide errors when the property is probably to be null -->
@@ -85,22 +88,55 @@
             </ng-container>
           </td>
           <!-- built-in pipes deal with value not html element it take the value and replace it with another value -->
-          <td>{{ pro.price}}</td>
+          <td>{{ pro.price }}</td>
 
           <!-- template variable -->
-          <td><input id="itemsCount" #itemsCount type="number" min="1" [max]="pro.quantity"/></td>
+          <td>
+            <input
+              id="itemsCount"
+              #itemsCount
+              type="number"
+              min="1"
+              [max]="pro.quantity"
+            />
+          </td>
+          <td>
+            <!-- <button
+              type="button"
+              class="btn btn-primary"
+              (click)="openProDetails(pro.id)"
+            >
+              Details
+            </button> -->
+            <a
+              name=""
+              id=""
+              class="btn btn-primary"
+              [routerLink]="['/Products', pro.id]"
+              role="button"
+            >
+              Details
+            </a>
+          </td>
           <td>
             <button
               type="button"
               class="btn btn-primary"
-              (click)="createCartProduct(pro.id, pro.name,pro.price, itemsCount.value,pro.quantity)"
+              (click)="
+                createCartProduct(
+                  pro.id,
+                  pro.name,
+                  pro.price,
+                  itemsCount.value,
+                  pro.quantity
+                )
+              "
             >
-              Buy
+              Add To Cart
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-  
   </body>
 </html>
