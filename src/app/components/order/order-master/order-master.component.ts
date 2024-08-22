@@ -25,7 +25,8 @@ export class OrderMasterComponent {
   // @ViewChild('clintNameInp') clintNameInpElem!:ElementRef;
   @ViewChild('productListComponent') productListComponentObj!: ProductListComponent;
   // maxPrice:number=this.productListComponentObj.getMaxPrice();
-  maxPrice: number = 100000
+  maxPrice: number|string = 100000
+
   constructor() {
     this.catList = [
       { id: 0, name: "All" },
@@ -54,7 +55,7 @@ export class OrderMasterComponent {
 
   }
   setMaxPrice(maxPrice: string) {
-    this.maxPrice = parseInt(maxPrice);
+    this.maxPrice = maxPrice;
 
   }
 
@@ -62,7 +63,7 @@ export class OrderMasterComponent {
   completeOrder() {
     this.productListComponentObj.updateQuantity(this.CartList)
 
-    // clearing the cartlist after confirmig the order
+  // clearing the cartlist after confirmig the order
     this.CartList = []
 
   }
