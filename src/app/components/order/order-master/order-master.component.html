@@ -16,14 +16,8 @@
 <div class="col-6">
   <label for="maxPrice" class="form-label col-12">max price </label>
 
-  <input id="maxPrice"  type="number" class=" form-control col-12"  #maxPriceInput >
-     <button
-  type="button"
-  class="btn btn-primary"
-  (click)="setMaxPrice(maxPriceInput.value)"
->
-  search
-</button>
+  <input id="maxPrice"  type="number" class=" form-control col-12"  #maxPriceInput  (change)="setMaxPrice(maxPriceInput.value)">
+   
 </div>
 </div>
 <div >

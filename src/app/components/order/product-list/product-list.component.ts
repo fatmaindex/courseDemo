@@ -16,7 +16,7 @@ export class ProductListComponent implements OnChanges {
   prdListOfprice: IProduct[] = [];
   orderDate: Date;
   @Input() sentCatID: number = 0;
-  @Input() sentMaxPrice: number|string = 0;
+  @Input() sentMaxPrice: number | string = 0;
   @Input() countInpVal: number = 0;
   @Output() onCreateCartPro: EventEmitter<CartProduct>
   constructor(private StaticProductsService: StaticProductsService, private router: Router) {
@@ -69,6 +69,7 @@ export class ProductListComponent implements OnChanges {
   private maxPriceSearch() {
     if (this.sentMaxPrice as string === "" || +this.sentMaxPrice === 0) {
       alert("enter a valid price")
+
     }
     else {
       this.prdListOfprice = this.prdListOfCatId.filter(pro => pro.price <= +this.sentMaxPrice)
